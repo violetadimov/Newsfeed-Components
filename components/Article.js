@@ -114,3 +114,63 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articles = document.querySelector('.articles');
+const spanOpenButton = '\u002b';
+
+
+function articleMaker(articleDataObj) {
+    const article = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+    const paragragh = document.createElement('p')
+    const articleParagragh1 = document.createElement('p');
+    const articleParagragh2 = document.createElement('p');
+    const articleParagragh3 = document.createElement('p');
+    const articleSpan = document.createElement('span');
+
+    article.appendChild(articleTitle);
+    article.appendChild(paragragh);
+    article.appendChild(articleParagragh1);
+    article.appendChild(articleParagragh2);
+    article.appendChild(articleParagragh3);
+    article.appendChild(articleSpan);
+
+    article.classList = 'article';
+    paragragh.classList = 'date';
+    articleSpan.classList = 'expandButton';
+
+    articleTitle.textContent = articleDataObj.title;
+    paragragh.textContent = articleDataObj.date;
+    articleParagragh1.textContent = articleDataObj.firstParagraph;
+    articleParagragh2.textContent = articleDataObj.secondParagraph;
+    articleParagragh3.textContent = articleDataObj.thirdParagraph;
+    articleSpan.textContent = spanOpenButton;
+
+    articleSpan.addEventListener('click', () => {
+
+        article.classList.toggle('article-open');
+
+    })
+
+    return article
+}
+
+console.log(articleMaker({
+    title: '{title of the article}',
+    date: '{date of the article}',
+}));
+
+
+
+const newArticleData = {
+    title: 'New Article Added',
+    date: 'July 8th, 2020',
+    firstParagraph: 'This is the first paragraph',
+    secondParagraph: 'This is the second paragraph',
+    thirdParagraph: 'This is the third paragraph'
+};
+data.push(newArticleData);
+data.forEach(object => {
+    const dataObj = articleMaker(object)
+    articles.appendChild(dataObj)
+})
